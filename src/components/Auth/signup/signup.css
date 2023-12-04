@@ -1,0 +1,25 @@
+/* signup.css */
+
+.Signup-container {
+    /* Add any container styles you need */
+  }
+  
+  .Signup-title {
+    color: #2c3e50; /* Change this color to your preferred text color */
+    /* Add any other title styles you'd like */
+  }
+  
+  .Signup-form {
+    /* Add any form styles you need */
+  }
+  
+  .Signup-btn {
+    background-color: #3498db; /* Change this color to your preferred button color */
+    /* Add any other button styles you'd like */
+  }
+  
+  .Signup-btn a {
+    color: #ffffff; /* Change this color to your preferred text color */
+    /* Add any other link styles you'd like */
+  }
+  
