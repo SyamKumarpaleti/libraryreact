@@ -2,8 +2,8 @@ import { useEffect, useState } from "react";
 
 import Login from "../Auth/login/login";
 import Books from "./book";
-import eternity from "/JAVA react/react_ui/library/library/src/assets/download.jpeg"
-import { useSearchParams } from "react-router-dom";
+
+import { Link, useSearchParams } from "react-router-dom";
 import NavbarComponent from "../navbar";
 import axios from "axios";
 
@@ -18,6 +18,7 @@ function CustomerDashboard() {
   const [msg, setMsg] = useState('');
   const [loading, setLoading] = useState(false);
   const [category, setCategory] = useState([]);
+ 
 
   useEffect(() => {
     axios.get('http://localhost:8182/Book/all')
@@ -105,7 +106,7 @@ function CustomerDashboard() {
   // };
 
   return (
-    <div style={{backgroundColor:'aquamarine'}}>
+    <div >
       <NavbarComponent func={searchBooks} />
       {/* {process()} */}
       <Row style={{ padding: 20 }}>
@@ -120,31 +121,51 @@ function CustomerDashboard() {
               </ListGroup.Item>
             </div>
           ))}
-        </ListGroup>
-      </Card>
-    </div>
-    <div className="col-md-8">
-      <Row>
-        {book.map((b, index) => (
-          <div key={index} className="col-md-4 mb-4">
-            <Card style={{ width: '350px', backgroundColor: 'rgba(255, 255, 255, 0.7)' }}>
-  <center><Image width={280} src={eternity} /></center>
-  <Card.Body>
-    <Card.Title>{b.bookTitle}</Card.Title>
-  </Card.Body>
-  <ListGroup className="list-group-flush">
-    <ListGroup.Item>Author: <h6>{b.author}</h6></ListGroup.Item>
-    <ListGroup.Item>Category: <h6>{b.category.name}</h6></ListGroup.Item>
-    <ListGroup.Item>Price: <h6>{b.bookPrice}</h6></ListGroup.Item>
-  </ListGroup>
-  <Button style={{ width: 200, alignSelf: "center", margin: 15 }} variant="outline-primary" href='/auth/login/login'>Add to cart</Button>
-</Card>
+            </ListGroup>
+          </Card>
+        </div>
+        <div className="col-md-8">
+          <Row>
+            {book.map((b, index) => (
+              <div key={index} className="col-md-4 mb-4">
+                <Card style={{ width: '400px', backgroundColor: 'rgba(255, 255, 255, 0.7)' }}>
+                  <Card.Body >
+                    <Link to={`/books/${b.bookTitle}`}>
+                      <Card.Title>{b.bookTitle}</Card.Title>
+                    </Link>
+
+                    <hr />
+                  </Card.Body>
+              <div>
+                <div style={{ display: 'flex', flexDirection: 'column', marginBottom: '10px' }}>
+                  <div>
+                    <span style={{ fontWeight: 'bold' }}>Rating:</span> {b.rating}
+                  </div>
+                  <div>
+                    <span style={{ fontWeight: 'bold' }}>Author:</span>
+                    <a href={`link/to/author/${b.author}`} target="_blank" rel="noopener noreferrer">
+                      {b.author}
+                    </a>
+                  </div>
+
+                  <div>
+                    <span style={{ fontWeight: 'bold' }}>Category:</span> {b.category.name}
+                  </div>
+                  <div>
+                    <span style={{ fontWeight: 'bold' }}>Price:</span> {b.bookPrice}
+                  </div>
+                </div>
+                <Button style={{ width: 200, alignSelf: "center", margin: 15 }} variant="outline-primary" href='/auth/login/login'>Add to cart</Button>
+              </div>
+            </Card>
+
+
 
           </div>
         ))}
+          </Row>
+        </div>
       </Row>
-    </div>
-  </Row>
     </div>
   );
 }
