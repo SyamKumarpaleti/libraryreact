@@ -1,29 +1,41 @@
 
 import React, { useState } from 'react';
 import { Col, Form, Row } from 'react-bootstrap';
-import Container from 'react-bootstrap/Container';
+
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
-import { useNavigate } from 'react-router';
+import { useNavigate, useParams } from 'react-router';
 
 
 function Navbarcomponent({func}){
+  const{id}=useParams();
     const navigate= useNavigate();
     const[qStr,setQStr]=useState('');
+    const handleCartClick = () => {
+      // Navigate to the cart page
+      navigate('/cart');
+    };
+    const handlePreviousOrdersClick = () => {
+      navigate('/previous_orders');
+    };
+    const handleDashBoardClick = () => {
+      navigate('/customer/dashboard');
+    };
+  
    
 
 
 return(
 <div className='mb-4'>
-<Navbar bg="dark" data-bs-theme="dark" style={{padding:15}}>
+<Navbar bg="dark" data-bs-theme="dark" style={{padding:10}}>
        
           <Navbar.Brand ><h2>INFOLIBRA</h2></Navbar.Brand>
          
           <Nav className="me-auto  mr-4">
-          <Navbar.Brand >Customer Dashboard</Navbar.Brand>
-            
-            <Nav.Link onClick={()=>navigate('/customer/dashboard?page=cart')}>cart</Nav.Link>
-            <Nav.Link onClick={()=>navigate('/customer/dashboard?page=previous_orders')}>Previous orders</Nav.Link>
+          
+          <Nav.Link onClick={handleDashBoardClick}>Customer Dashboard</Nav.Link>  
+          <Nav.Link onClick={handleCartClick}>Cart</Nav.Link>
+          <Nav.Link onClick={handlePreviousOrdersClick}>Previous orders</Nav.Link>
           </Nav>
         
         <Navbar.Collapse className="justify-content-end">
@@ -55,7 +67,7 @@ return(
           }}>Logout</button>
           </React.Fragment>
           : 
-          <button className="btn btn-primary" onClick={()=>navigate('/auth/login/login')}>Login</button>
+          <button className="btn btn-primary" onClick={()=>navigate('/auth/login')}>Login</button>
           }
           
 

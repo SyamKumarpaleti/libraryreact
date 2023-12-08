@@ -1,41 +1,47 @@
 // components/Auth/login/Login.js
-
 import React, { useState } from "react";
 import { Col, Button, Row, Container, Card, Form } from "react-bootstrap";
-import './login.css'; // Import the CSS file
-import { useSearchParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 function Login() {
-  const [param] = useSearchParams();
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
+  const [msg, setMsg] = useState('');
+  const navigate = useNavigate();
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
   };
-  const handleLogin = async (event) => {
-    event.preventDefault();
 
-    // Assuming your Spring Boot backend is running on http://localhost:8182
-    const apiUrl = "http://localhost:8182/user/login";
-    const formData = new FormData(event.target);
-
-    try {
-      const response = await fetch(apiUrl, {
-        method: "POST",
-        body: formData,
-      });
-
-      if (response.ok) {
-        // Handle successful login
-        console.log("Login successful");
-      } else {
-        // Handle login error
-        console.error("Login failed");
+  const doLogin = (e) => {
+    e.preventDefault();
+    let token = window.btoa(username + ':' + password);
+    axios.post('http://localhost:8182/auth/login', {}, {
+      headers: {
+        'Authorization': 'Basic ' + token
       }
-    } catch (error) {
-      // Handle network error
-      console.error("Network error", error);
-    }
+    })
+      .then(function (response) {
+        localStorage.setItem('username', username);
+        localStorage.setItem('token', token);
+        localStorage.setItem('id', response.data.id);
+        localStorage.setItem('isLoggedIn', true);
+        let role = response.data.user.role;
+        switch (role) {
+          case 'Admin':
+            navigate('/admin/dashboard/'+response.data.id)
+            break;
+          case 'CUSTOMER':
+            navigate('/customer/dashboard/'+response.data.id)
+            break;
+          default:
+        }
+      })
+      .catch(function (error) {
+        setMsg('Invalid Credintials');
+      });
   };
 
   return (
@@ -50,10 +56,10 @@ function Login() {
                   <h2 className="fw-bold mb-2 text-uppercase">Welcome to INFOLIBRA</h2>
                   <p className="mb-5">Please enter your login and password!</p>
                   <div className="mb-3">
-                    <Form onSubmit={handleLogin}>
+                    <Form onSubmit={doLogin}>
                       <Form.Group className="mb-3" controlId="formBasicEmail">
                         <Form.Label className="text-center">Username</Form.Label>
-                        <Form.Control type="text" placeholder="Enter username" />
+                        <Form.Control type="text" placeholder="Enter username" onChange={(e) => setUsername(e.target.value)} />
                       </Form.Group>
 
                       <Form.Group className="mb-3" controlId="formBasicPassword">
@@ -62,6 +68,7 @@ function Login() {
                           <Form.Control
                             type={showPassword ? "text" : "password"}
                             placeholder="Password"
+                            onChange={(e) => setPassword(e.target.value)}
                           />
                         </div>
                       </Form.Group>

@@ -1,25 +1,92 @@
+// App.js
 
-import { Route, Router, Routes } from 'react-router';
+// import { Route, Routes } from 'react-router';
+// import './App.css';
+// import Login from './components/Auth/login/login';
+// import Signup from './components/Auth/signup/signup';
+// import CustomerDashboard from './components/Customer/dashboard';
+// import BookDetails from './components/book/desc';
+// import AuthorDetails from './components/book/author';
+// import CartComponent from './components/Customer/cart';
+// import React from 'react';
+
+// function App() {
+//   const [cart, setCart] = React.useState([]);
+
+//   return (
+//     <div className="App">
+//       <Routes>
+//         <Route path="/" element={<CustomerDashboard setCart={setCart} />} />
+//         <Route path="/books" element={<BookDetails />} />
+//         <Route path="/authors" element={<AuthorDetails />} />
+//         <Route path="/customer/dashboard" element={<CustomerDashboard setCart={setCart} />} />
+//         <Route path='/auth/login' element={<Login />} />
+//         <Route path='/auth/signup' element={<Signup />} />
+//         <Route path="/cart" element={<CartComponent cart={cart} />} />
+//       </Routes>
+//     </div>
+//   );
+// }
+
+// export default App;
+// App.js
+import React from 'react';
+import { Route, Routes } from 'react-router';
 import './App.css';
 import Login from './components/Auth/login/login';
 import Signup from './components/Auth/signup/signup';
 import CustomerDashboard from './components/Customer/dashboard';
 import BookDetails from './components/book/desc';
+import AuthorDetails from './components/book/author';
+import CartComponent from './components/Customer/cart';
+import BookingComponent from './components/Customer/booking';
+//import AdminDashboard from './components/Admin/dashboard';
+import PreviousOrders from './components/Customer/history';
+
+
+import BookingStatus from './components/Customer/bookingstatus';
+import AdminNavbar from './components/Admin/adminnavbar';
+import Navbarcomponent from './components/navbar';
+import AddingBook from './components/Admin/addingbooks';
+import Addbooks from './components/Admin/addingbooks';
+import AdminDashboard from './components/Admin/dashboard';
+import UpdateComponent from './components/Admin/update';
+import DeleteComponent from './components/Admin/delete';
+import VSComponent from './components/Admin/viewstatus';
+
 
 function App() {
-  return (
+  const [cart, setCart] = React.useState([]);
 
+  return (
     <div className="App">
-    <Routes>
-    <Route path="/" element={<CustomerDashboard/>}></Route>
-    <Route path="/customer/dashboard" element={<CustomerDashboard/>}></Route>
-    
-    <Route path='/auth/login/login'element={<Login/>}></Route>
-    <Route path='/auth/signup'element={<Signup/>}></Route>
-    
-    </Routes>
-   </div>
-    
+     
+      
+
+      
+
+      <Routes>
+        <Route path="/" element={<Login />} />
+        <Route path="/books" element={<BookDetails />} />
+        <Route path="/authors" element={<AuthorDetails />} />
+        <Route path="/customer/dashboard/:cid" element={<CustomerDashboard setCart={setCart} />} />
+        <Route path='/auth/login' element={<Login />} />
+        <Route path='/auth/signup' element={<Signup />} />
+        <Route path="/cart/:cid" element={<CartComponent cart={cart} setCart={setCart} />} />
+        <Route path="/booking" element={<BookingComponent cart={cart} />} />
+        <Route path="/previous_orders" element={<PreviousOrders />} />
+        <Route path="/bookingStatus" element={<BookingStatus />} />
+
+
+        <Route path='/admin/add/:id' element={<AddingBook />} /> 
+        <Route path='/admin/dashboard/:id' element={<AdminDashboard />} />
+        <Route path="/admin/update/:id" element={<UpdateComponent />} />
+
+        <Route path='/admin/delete/:id' element={<DeleteComponent />} />
+        <Route path='/admin/viewstatus/:id' element={<VSComponent />} />
+
+      </Routes>
+    </div>
   );
 }
 
