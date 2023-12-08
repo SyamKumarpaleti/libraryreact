@@ -82,7 +82,7 @@ function App() {
         <Route path='/admin/dashboard/:id' element={<AdminDashboard />} />
         <Route path="/admin/update/:id" element={<UpdateComponent />} />
 
-        <Route path='/admin/delete/:id' element={<DeleteComponent />} />
+        
         <Route path='/admin/viewstatus/:id' element={<VSComponent />} />
 
       </Routes>

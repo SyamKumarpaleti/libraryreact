@@ -4,9 +4,10 @@ import { Link, useParams } from "react-router-dom";
 import { useState } from "react";
 import axios from "axios";
 
-function DeleteComponent(b){
+function DeleteComponent(){
   const { id } = useParams();
     const [book, setBook] = useState({})
+   
    
 
     return(

@@ -1,4 +1,4 @@
-import { Navbar } from "react-bootstrap";
+
 import AdminNavbar from "./adminnavbar";
 import { useNavigate, useParams } from "react-router";
 import { useEffect, useState } from "react";
@@ -11,16 +11,16 @@ function AdminDashboard() {
   const navigate = useNavigate('');
   const [book, setBook] = useState([]);
   const [delBook, setDelBook] = useState([]);
-  const { id } = useParams();
+  
 
   useEffect(() => {
     axios.get('http://localhost:8182/Book/all')
       .then(response => setBook(response.data));
   }, []);
-  const handleDelete = (bid) => {
-    console.log('Deleting book with ID:', bid);
+  const handleDelete = (bookId) => {
+    console.log('Deleting book with ID:', bookId);
   
-    axios.delete(`http://localhost:8182/Book/delete/${bid}/${id}`)
+    axios.delete(`http://localhost:8182/Book/delete/${bookId}`)
       .then(response => {
         console.log( response.data);
         setDelBook(response.data);
@@ -29,10 +29,6 @@ function AdminDashboard() {
         console.error('Error deleting book:', error);
       });
   };
-    
-  
-  
-
   return (
     <div>
       <AdminNavbar />

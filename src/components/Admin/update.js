@@ -7,23 +7,15 @@ import AdminNavbar from "./adminnavbar";
 function UpdateComponent(bid) {
     const { id} = useParams();
     const [book, setBook] = useState({})
-
     const [bookTitle, setBookTitle] = useState('');
-   
     const [author, setAuthor] = useState('');
-    
-    
     const [bookPrice, setBookPrice] = useState('');
     const [noOfCopies, setNoOfCopies] = useState('');
-
     const handleSubmit = (e) => {
         e.preventDefault();
         let data = ({
             "bookTitle": bookTitle,
-           
             "author": author,
-            
-           
             "bookPrice": bookPrice,
             "noOfCopies": noOfCopies,
         });
