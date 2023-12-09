@@ -1,9 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Container, Row, Col, Form, Button, Table } from 'react-bootstrap';
 import AdminNavbar from './adminnavbar';
+import axios from 'axios';
+import { useParams } from 'react-router';
 
 function CustomersTable() {
-  // Replace this with the actual logic to display the customers table
+  const {id}=useParams();
   return (
     <div>
       <h2>Customers Table</h2>
@@ -15,7 +17,6 @@ function CustomersTable() {
 }
 
 function BooksTable() {
-  // Replace this with the actual logic to display the books table
   return (
     <div>
       <h2>Books Table</h2>
@@ -29,15 +30,30 @@ function BooksTable() {
 function VSComponent() {
   const [showCustomersTable, setShowCustomersTable] = useState(false);
   const [showBooksTable, setShowBooksTable] = useState(false);
+  const [customers, setCustomers] = useState([]);
+  const [books, setBooks] = useState([]);
+  const [bookId,customerId]=useState([])
 
-  const handleCustomersClick = () => {
-    setShowCustomersTable(true);
-    setShowBooksTable(false);
+  const handleCustomersClick = async () => {
+    try {
+      const response = await axios.get(`http://localhost:8182/customerBook/customerid/${customerId}`);
+      setCustomers(response.data);
+      setShowCustomersTable(true);
+      setShowBooksTable(false);
+    } catch (error) {
+      console.error('Error fetching customers:', error.message);
+    }
   };
 
-  const handleBooksClick = () => {
-    setShowBooksTable(true);
-    setShowCustomersTable(false);
+  const handleBooksClick = async () => {
+    try {
+      const response = await axios.get(`http://localhost:8182/customerBook/bookid/${bookId}`);
+      setBooks(response.data);
+      setShowBooksTable(true);
+      setShowCustomersTable(false);
+    } catch (error) {
+      console.error('Error fetching books:', error.message);
+    }
   };
 
   return (
@@ -62,14 +78,14 @@ function VSComponent() {
             </Row>
             <Row>
               <Col>
-                <h4>No. of Customers: {/* Replace with the actual count of customers */}</h4>
+                <h4>No. of Customers: {customers.length}</h4>
               </Col>
               <Col>
-                <h4>No. of Books: {/* Replace with the actual count of books */}</h4>
+                <h4>No. of Books: {books.length}</h4>
               </Col>
             </Row>
-            {showCustomersTable && <CustomersTable />}
-            {showBooksTable && <BooksTable />}
+            {showCustomersTable && <CustomersTable customers={customers} />}
+            {showBooksTable && <BooksTable books={books} />}
           </Col>
         </Row>
       </Container>

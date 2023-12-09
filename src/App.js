@@ -70,12 +70,15 @@ function App() {
         <Route path="/books" element={<BookDetails />} />
         <Route path="/authors" element={<AuthorDetails />} />
         <Route path="/customer/dashboard/:cid" element={<CustomerDashboard setCart={setCart} />} />
+        <Route path="/customer/dashboard" element={<CustomerDashboard  />} />
+        {/* <Route path="/cart" element={<CartComponent  />} /> */} 
         <Route path='/auth/login' element={<Login />} />
         <Route path='/auth/signup' element={<Signup />} />
         <Route path="/cart/:cid" element={<CartComponent cart={cart} setCart={setCart} />} />
-        <Route path="/booking" element={<BookingComponent cart={cart} />} />
+        <Route path="/booking" element={<BookingComponent  />} />
         <Route path="/previous_orders" element={<PreviousOrders />} />
-        <Route path="/bookingStatus" element={<BookingStatus />} />
+        <Route path="/bookingStatus/:id" element={<BookingStatus cart={cart}/>} />
+        <Route path="/cart/:cid" element={<CartComponent cart={cart} setCart={setCart} />} />
 
 
         <Route path='/admin/add/:id' element={<AddingBook />} /> 
@@ -84,6 +87,7 @@ function App() {
 
         
         <Route path='/admin/viewstatus/:id' element={<VSComponent />} />
+        <Route path='/booking/:cid' element={<BookingComponent  />} />
 
       </Routes>
     </div>

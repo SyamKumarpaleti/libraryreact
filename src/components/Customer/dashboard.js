@@ -2,32 +2,33 @@ import React, { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import NavbarComponent from "../navbar";
 import axios from "axios";
-import { Button, Card, ListGroup, Nav, Row } from "react-bootstrap";
+import { Button, Card, ListGroup, Nav, Row, Pagination } from "react-bootstrap";
 
-function CustomerDashboard({ setCart }) {
+function CustomerDashboard({ cart,setCart }) {
   const navigate = useNavigate();
-  const {cid} = useParams();
-  const [qStr, setQstr] = useState('');
+  const { cid } = useParams();
+  const [qStr, setQstr] = useState("");
   const [book, setBooks] = useState([]);
   const [categories, setCategories] = useState([]);
-  const [msg, setMsg] = useState('');
+  const [msg, setMsg] = useState("");
   const [loading, setLoading] = useState(false);
   const [category, setCategory] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [booksPerPage] = useState(6); // Adjust the number of books per page
 
   useEffect(() => {
+    axios
+      .get("http://localhost:8182/Book/all")
+      .then((response) => setBooks(response.data))
+      .catch((error) => setMsg("Error in Fetching books"));
 
-    console.log(cid)
-    axios.get('http://localhost:8182/Book/all')
-      .then(response => setBooks(response.data))
-      .catch(error => setMsg('Error in Fetching books'));
-
-    axios.get('http://localhost:8182/category/getall')
-      .then(response => setCategories(response.data))
-      .catch(error => setMsg('Error in Fetching categories'));
-  }, [])
+    axios
+      .get("http://localhost:8182/category/getall")
+      .then((response) => setCategories(response.data))
+      .catch((error) => setMsg("Error in Fetching categories"));
+  }, []);
 
   const searchBooks = (str) => {
-    console.log('search func in parent comp called.....' + str)
     setQstr(str);
   };
 
@@ -37,23 +38,50 @@ function CustomerDashboard({ setCart }) {
 
   const getBookCategory = async (id) => {
     setLoading(true);
-    const response = await axios.get(`http://localhost:8182/customer/getbycategoryid?id=${id}`);
-    console.log('API response:', response);
+    const response = await axios.get(
+      `http://localhost:8182/customer/getbycategoryid?id=${id}`
+    );
     setBooks(response.data || []);
   };
 
   const addToCart = (selectedBook) => {
-    setCart(prevCart => [...prevCart, selectedBook]);
+    setCart((prevCart) => [...prevCart, selectedBook]);
   };
 
   const handleBooks = (selectedBook) => {
-    if (localStorage.getItem('isLoggedIn')) {
+    if (localStorage.getItem("isLoggedIn")) {
       addToCart(selectedBook);
       navigate(`/cart/${cid}`);
     } else {
       navigate("/auth/login");
     }
+    
   };
+  // const HandleButtonClick = async () => {
+  //   try {
+  //     const customerId = cid;
+  //     const bookIds = cart.map((book) => book.id);
+
+  //     const response = await axios.post(
+  //       `http://localhost:8182/customerBook/customerid/${customerId}`,
+  //       {
+  //         bookIds: bookIds, // Sending an array of book IDs to the backend
+  //       }
+  //     );
+
+  //     if (response.status === 200) {
+  //       setCart([]); // Clear the cart after purchase
+  //       navigate("/booking");
+  //     } else {
+  //       console.error(`Error: ${response.data}`);
+  //     }
+  //   } catch (error) {
+  //     console.error(`Error: ${error.message}`);
+  //   }
+  // };
+  
+  
+
 
   return (
     <div style={{ backgroundColor: "#3456", padding: 20, minHeight: "100vh" }}>
@@ -116,6 +144,10 @@ function CustomerDashboard({ setCart }) {
           </Row>
         </div>
       </Row>
+      <div>
+     
+      </div>
+
     </div>
   );
 }
