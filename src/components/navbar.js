@@ -13,7 +13,7 @@ function Navbarcomponent({func}){
     const[qStr,setQStr]=useState('');
     const handleCartClick = () => {
       // Navigate to the cart page
-      navigate('/cart');
+      navigate('/book/cart');
     };
     const handlePreviousOrdersClick = () => {
       navigate('/previous_orders');
@@ -35,7 +35,7 @@ return(
           
           <Nav.Link onClick={handleDashBoardClick}>Customer Dashboard</Nav.Link>  
           <Nav.Link onClick={handleCartClick}>Cart</Nav.Link>
-          <Nav.Link onClick={handlePreviousOrdersClick}>Previous orders</Nav.Link>
+                    <Nav.Link onClick={handlePreviousOrdersClick}>Previous orders</Nav.Link>
           </Nav>
         
         <Navbar.Collapse className="justify-content-end">

@@ -9,7 +9,12 @@ function BookingStatus() {
   const { id } = useParams();
 
   useEffect(() => {
-    axios.get(`http://localhost:8182/customerBook/customerid/${id}`).then((response) => setCustomerBook(response.data));
+    axios.get(`http://localhost:8182/customerBook/customerid/${id}`)
+      .then((response) => {
+        console.log("API response:", response.data);
+        setCustomerBook(response.data);
+      })
+      .catch((error) => console.error("Error fetching customer books:", error));
   }, [id]);
 
   return (

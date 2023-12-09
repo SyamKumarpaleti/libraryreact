@@ -18,7 +18,6 @@ function AdminNavbar({ func }) {
           <Nav.Link onClick={() => navigate(`/admin/add/${id}`)}>ADD BOOK</Nav.Link>
           
        
-          <Nav.Link onClick={() => navigate(`/admin/viewstatus/${id}`)}>VIEW ORDERS</Nav.Link>
         </Nav>
         <Navbar.Collapse className="justify-content-end">
           <Form onSubmit={(e) => { e.preventDefault(); func(qStr) }}>

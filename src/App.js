@@ -89,6 +89,11 @@ function App() {
         <Route path='/admin/viewstatus/:id' element={<VSComponent />} />
         <Route path='/booking/:cid' element={<BookingComponent  />} />
 
+
+
+
+        <Route path="/book/cart" element={<CartComponent />} />
+
       </Routes>
     </div>
   );
