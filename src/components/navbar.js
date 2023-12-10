@@ -5,26 +5,19 @@ import { Col, Form, Row } from 'react-bootstrap';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import { useNavigate, useParams } from 'react-router';
+import { useSearchParams } from 'react-router-dom';
 
 
 function Navbarcomponent({func}){
-  const{id}=useParams();
+  const {cid}=useParams();
     const navigate= useNavigate();
     const[qStr,setQStr]=useState('');
-    const handleCartClick = () => {
-      // Navigate to the cart page
-      navigate('/book/cart');
-    };
-    const handlePreviousOrdersClick = () => {
-      navigate('/previous_orders');
-    };
-    const handleDashBoardClick = () => {
-      navigate('/customer/dashboard');
-    };
-  
    
-
-
+    const handlePreviousOrdersClick = () => {
+      navigate(`/previous_orders/${cid}`);
+    };
+    
+    
 return(
 <div className='mb-4'>
 <Navbar bg="dark" data-bs-theme="dark" style={{padding:10}}>
@@ -33,8 +26,8 @@ return(
          
           <Nav className="me-auto  mr-4">
           
-          <Nav.Link onClick={handleDashBoardClick}>Customer Dashboard</Nav.Link>  
-          <Nav.Link onClick={handleCartClick}>Cart</Nav.Link>
+         
+          
                     <Nav.Link onClick={handlePreviousOrdersClick}>Previous orders</Nav.Link>
           </Nav>
         

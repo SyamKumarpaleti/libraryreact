@@ -4,7 +4,7 @@ import NavbarComponent from "../navbar";
 import axios from "axios";
 import { Button, Card, ListGroup, Nav, Row, Pagination } from "react-bootstrap";
 
-function CustomerDashboard({ cart,setCart }) {
+function CustomerDashboard({ cart, setCart }) {
   const navigate = useNavigate();
   const { cid } = useParams();
   const [qStr, setQstr] = useState("");
@@ -14,7 +14,7 @@ function CustomerDashboard({ cart,setCart }) {
   const [loading, setLoading] = useState(false);
   const [category, setCategory] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const [booksPerPage] = useState(6); // Adjust the number of books per page
+  const [booksPerPage] = useState(6);
 
   useEffect(() => {
     axios
@@ -51,37 +51,17 @@ function CustomerDashboard({ cart,setCart }) {
   const handleBooks = (selectedBook) => {
     if (localStorage.getItem("isLoggedIn")) {
       addToCart(selectedBook);
-      navigate(`/cart/${cid}`);
+      navigate(`/book/cart/${cid}`);
     } else {
       navigate("/auth/login");
     }
-    
   };
-  // const HandleButtonClick = async () => {
-  //   try {
-  //     const customerId = cid;
-  //     const bookIds = cart.map((book) => book.id);
 
-  //     const response = await axios.post(
-  //       `http://localhost:8182/customerBook/customerid/${customerId}`,
-  //       {
-  //         bookIds: bookIds, // Sending an array of book IDs to the backend
-  //       }
-  //     );
+  const indexOfLastBook = currentPage * booksPerPage;
+  const indexOfFirstBook = indexOfLastBook - booksPerPage;
+  const currentBooks = book.slice(indexOfFirstBook, indexOfLastBook);
 
-  //     if (response.status === 200) {
-  //       setCart([]); // Clear the cart after purchase
-  //       navigate("/booking");
-  //     } else {
-  //       console.error(`Error: ${response.data}`);
-  //     }
-  //   } catch (error) {
-  //     console.error(`Error: ${error.message}`);
-  //   }
-  // };
-  
-  
-
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   return (
     <div style={{ backgroundColor: "#3456", padding: 20, minHeight: "100vh" }}>
@@ -109,7 +89,7 @@ function CustomerDashboard({ cart,setCart }) {
         </div>
         <div className="col-md-8">
           <Row>
-            {book.map((b, index) => (
+            {currentBooks.map((b, index) => (
               <div key={index} className="col-md-4 mb-4">
                 <Card style={{ width: '400px', backgroundColor: '#your_card_background_color_here' }}>
                   <Card.Body style={{ backgroundColor: '#your_card_body_background_color_here' }}>
@@ -142,12 +122,20 @@ function CustomerDashboard({ cart,setCart }) {
               </div>
             ))}
           </Row>
+          <Pagination>
+            {Array.from({ length: Math.ceil(book.length / booksPerPage) }).map((_, index) => (
+              <Pagination.Item
+                key={index + 1}
+                active={index + 1 === currentPage}
+                onClick={() => paginate(index + 1)}
+              >
+                {index + 1}
+              </Pagination.Item>
+            ))}
+          </Pagination>
         </div>
       </Row>
-      <div>
-     
-      </div>
-
+      <div></div>
     </div>
   );
 }

@@ -53,6 +53,7 @@ import AdminDashboard from './components/Admin/dashboard';
 import UpdateComponent from './components/Admin/update';
 import DeleteComponent from './components/Admin/delete';
 import VSComponent from './components/Admin/viewstatus';
+import BookingPage from './components/Customer/order';
 
 
 function App() {
@@ -69,18 +70,18 @@ function App() {
         <Route path="/" element={<Login />} />
         <Route path="/books" element={<BookDetails />} />
         <Route path="/authors" element={<AuthorDetails />} />
-        <Route path="/customer/dashboard/:cid" element={<CustomerDashboard setCart={setCart} />} />
-        <Route path="/customer/dashboard" element={<CustomerDashboard  />} />
+        <Route path="/customer/dashboard/:cid" element={<CustomerDashboard cart={cart} setCart={setCart} />} />
+       <Route path="/customer/dashboard/booking" element={<BookingPage></BookingPage>}></Route>
         {/* <Route path="/cart" element={<CartComponent  />} /> */} 
         <Route path='/auth/login' element={<Login />} />
         <Route path='/auth/signup' element={<Signup />} />
         <Route path="/cart/:cid" element={<CartComponent cart={cart} setCart={setCart} />} />
         <Route path="/booking" element={<BookingComponent  />} />
-        <Route path="/previous_orders" element={<PreviousOrders />} />
-        <Route path="/bookingStatus/:id" element={<BookingStatus cart={cart}/>} />
-        <Route path="/cart/:cid" element={<CartComponent cart={cart} setCart={setCart} />} />
+        <Route path="/previous_orders/:cid" element={<PreviousOrders />} />
+        <Route path="/customer/dashboard/bookingStatus/:id" element={<BookingStatus cart={cart}/>} />
+        {/* <Route path="/cart/:cid" element={<CartComponent cart={cart} setCart={setCart} />} /> */}
 
-
+        <Route path='/book/cart/:cid' element={<CartComponent cart={cart} setCart={setCart}/>} /> 
         <Route path='/admin/add/:id' element={<AddingBook />} /> 
         <Route path='/admin/dashboard/:id' element={<AdminDashboard />} />
         <Route path="/admin/update/:id" element={<UpdateComponent />} />

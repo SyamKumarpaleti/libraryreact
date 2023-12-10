@@ -44,6 +44,7 @@ function VSComponent() {
       console.error('Error fetching customers:', error.message);
     }
   };
+  
 
   const handleBooksClick = async () => {
     try {
@@ -92,5 +93,6 @@ function VSComponent() {
     </div>
   );
 }
+
 
 export default VSComponent;
