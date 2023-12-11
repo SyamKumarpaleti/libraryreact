@@ -7,11 +7,11 @@ function BookingPage() {
   const bookingData = location.state?.bookingData;
 
   if (!bookingData || !bookingData.cart) {
-    // If bookingData or cart is undefined, handle the case accordingly
+    
     return (
       <div>
         <h2>Invalid Booking Data</h2>
-        {/* You can add a message or redirect the user */}
+       
       </div>
     );
   }
@@ -40,7 +40,7 @@ function BookingPage() {
           </Card.Text>
         </Card.Body>
       </Card>
-      {/* Add other components as needed */}
+      
     </div>
   );
 }

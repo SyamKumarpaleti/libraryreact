@@ -31,7 +31,7 @@ function HomeComponent(props) {
           <SidebarComponent />
         </div>
         <div className="col-md-9">
-          {/* Your existing code for displaying cards */}
+        
         </div>
       </div>
     </div>

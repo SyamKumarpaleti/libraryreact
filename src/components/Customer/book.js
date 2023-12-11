@@ -28,7 +28,7 @@ function Books(){
                       height: "12rem",
                     }}
                   >
-                    {/* <img alt="Sample" src="https://picsum.photos/300/200" /> */}
+                  
                     <CardBody>
                       <CardTitle tag="h5">{p.title}</CardTitle>
                       <CardSubtitle className="mb-2 text-muted" tag="h6">

@@ -3,6 +3,8 @@ import React, { useState } from "react";
 import { Col, Button, Row, Container, Card, Form } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import './login.css';
+
 
 function Login() {
   const [username, setUsername] = useState('');
@@ -45,7 +47,7 @@ function Login() {
   };
 
   return (
-    <div>
+    <div style={{ backgroundImage: 'url("https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.wallpaperflare.com%2Fsearch%3Fwallpaper%3Dlibrary&psig=AOvVaw0HLlVbHn42M1nw0062Bx9W&ust=1702355243192000&source=images&cd=vfe&ved=0CBIQjRxqFwoTCLjsws7FhoMDFQAAAAAdAAAAABAE")', backgroundSize: 'cover', backgroundPosition: 'center', minHeight: "100vh" }}>
       <Container>
         <Row className="vh-100 d-flex justify-content-center align-items-center">
           <Col md={8} lg={6} xs={12}>

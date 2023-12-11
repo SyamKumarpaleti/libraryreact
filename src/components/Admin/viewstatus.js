@@ -10,7 +10,7 @@ function CustomersTable() {
     <div>
       <h2>Customers Table</h2>
       <Table striped bordered hover>
-        {/* Add the table headers and rows for customers */}
+       
       </Table>
     </div>
   );
@@ -21,7 +21,7 @@ function BooksTable() {
     <div>
       <h2>Books Table</h2>
       <Table striped bordered hover>
-        {/* Add the table headers and rows for books */}
+       
       </Table>
     </div>
   );

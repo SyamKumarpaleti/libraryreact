@@ -7,16 +7,16 @@ function BookingComponent({ cart }) {
   const navigate = useNavigate();
 
   const handleCancelClick = () => {
-    // Navigate back to the cart page
+   
     navigate('/cart');
   };
 
   const handleContinueClick = () => {
-    // Navigate to the bookingStatus page
+   
     navigate('/bookingStatus');
   };
 
-  // Check if cart is defined
+ 
   if (!cart) {
     return (
       <div>

@@ -1,8 +1,8 @@
-// components/Auth/Signup.js
+
 
 import React, { useState } from "react";
 import { Col, Button, Row, Container, Card, Form } from "react-bootstrap";
-import "./signup.css"; // Import the CSS file
+import "./signup.css";
 import { useNavigate } from "react-router";
 import axios from "axios";
 
@@ -20,15 +20,26 @@ function Signup() {
   const[customer,setCustomer]=useState({});
   const navigate = useNavigate();
   const [msg,setMsg] = useState('');
+  const contactRegex = /^[0-9]{10}$/;
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-  const handleTogglePassword=()=>{
-    setShowPassword((prevShowPassword)=>!prevShowPassword);
 
-  };
+  
+
   
 
   const doSignUp=(e)=>{
     e.preventDefault();
+    if (!contactRegex.test(contact)) {
+      setMsg('Invalid contact number');
+      return;
+    }
+
+    if (!emailRegex.test(email)) {
+      setMsg('Invalid email address');
+      return;
+    }
+
     
     let customerObj={
       "name":name,

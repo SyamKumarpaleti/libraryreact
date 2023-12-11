@@ -67,7 +67,7 @@ function App() {
       
 
       <Routes>
-        <Route path="/" element={<Login />} />
+        <Route path="/" element={<CustomerDashboard />} />
         <Route path="/books" element={<BookDetails />} />
         <Route path="/authors" element={<AuthorDetails />} />
         <Route path="/customer/dashboard/:cid" element={<CustomerDashboard cart={cart} setCart={setCart} />} />

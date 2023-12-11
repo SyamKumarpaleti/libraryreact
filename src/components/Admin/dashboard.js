@@ -58,7 +58,7 @@ function AdminDashboard() {
   const handleDeleteBook = async (bookId) => {
     try {
       await axios.delete(`http://localhost:8182/Book/delete/${bookId}`);
-      // Refresh the books list after deletion
+    
       fetchBooks();
     } catch (error) {
       console.error("Error deleting book:", error.message);
@@ -142,13 +142,13 @@ function AdminDashboard() {
                     onClick={() => navigateToAddBook()}
                   >
                     ADD
-                  </Button>
+                  </Button> &nbsp;
                   <Button
                     variant="info"
                     onClick={() => navigateToUpdateBook(book.id)}
                   >
                     UPDATE
-                  </Button>
+                  </Button> &nbsp;
                   <Button
                     variant="danger"
                     onClick={() => handleDeleteBook(book.id)}

@@ -1,6 +1,7 @@
 body {
   margin: 0;
   font-family: 'Rubik', sans-serif;
+  background-image: 'src\components\Customer\library-image.jpg';
   
   position: relative;
 }

@@ -1,4 +1,4 @@
-// CartItem.js
+
 import React from "react";
 
 function CartItem({ book, removeFromCart }) {
