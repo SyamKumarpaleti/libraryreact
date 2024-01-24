@@ -5,16 +5,16 @@ import { Table } from "react-bootstrap";
 import { useParams } from "react-router";
 
 function PreviousOrders() {
-  const { cid } = useParams();  // Use useParams as a function
+  const { cid } = useParams();  
 
   const [orders, setOrders] = useState([]);
 
   useEffect(() => {
-    // Fetch orders from the API
+    
     axios.get(`http://localhost:8182/customerBook/customerid/${cid}`)
       .then((response) => setOrders(response.data))
       .catch((error) => console.error("Error fetching orders:", error));
-  }, [cid]);  // Add id as a dependency to re-fetch when it changes
+  }, [cid]); 
 
   const calculateTotalFine = () => {
     return orders.reduce((total, order) => total + order.amount, 0);
@@ -33,7 +33,7 @@ function PreviousOrders() {
             <th>Issue Date</th>
             <th>Return Date</th>
             <th>Fine</th>
-            {/* Add more columns based on your data structure */}
+          
           </tr>
         </thead>
         <tbody>
@@ -43,7 +43,7 @@ function PreviousOrders() {
               <td>{order.issueDate}</td>
               <td>{order.returnDate}</td>
               <td>{order.amount}</td>
-              {/* Add more cells based on your data structure */}
+             
             </tr>
           ))}
           <tr>

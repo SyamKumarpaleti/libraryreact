@@ -1,35 +1,4 @@
-// App.js
 
-// import { Route, Routes } from 'react-router';
-// import './App.css';
-// import Login from './components/Auth/login/login';
-// import Signup from './components/Auth/signup/signup';
-// import CustomerDashboard from './components/Customer/dashboard';
-// import BookDetails from './components/book/desc';
-// import AuthorDetails from './components/book/author';
-// import CartComponent from './components/Customer/cart';
-// import React from 'react';
-
-// function App() {
-//   const [cart, setCart] = React.useState([]);
-
-//   return (
-//     <div className="App">
-//       <Routes>
-//         <Route path="/" element={<CustomerDashboard setCart={setCart} />} />
-//         <Route path="/books" element={<BookDetails />} />
-//         <Route path="/authors" element={<AuthorDetails />} />
-//         <Route path="/customer/dashboard" element={<CustomerDashboard setCart={setCart} />} />
-//         <Route path='/auth/login' element={<Login />} />
-//         <Route path='/auth/signup' element={<Signup />} />
-//         <Route path="/cart" element={<CartComponent cart={cart} />} />
-//       </Routes>
-//     </div>
-//   );
-// }
-
-// export default App;
-// App.js
 import React from 'react';
 import { Route, Routes } from 'react-router';
 import './App.css';
@@ -61,15 +30,11 @@ function App() {
 
   return (
     <div className="App">
-     
-      
-
-      
-
       <Routes>
-        <Route path="/" element={<CustomerDashboard />} />
+        <Route path="/" element={<CustomerDashboard cart={cart} setCart={setCart}  />} />
         <Route path="/books" element={<BookDetails />} />
         <Route path="/authors" element={<AuthorDetails />} />
+        
         <Route path="/customer/dashboard/:cid" element={<CustomerDashboard cart={cart} setCart={setCart} />} />
        <Route path="/customer/dashboard/booking" element={<BookingPage></BookingPage>}></Route>
         {/* <Route path="/cart" element={<CartComponent  />} /> */} 
@@ -81,7 +46,7 @@ function App() {
         <Route path="/customer/dashboard/bookingStatus/:id" element={<BookingStatus cart={cart}/>} />
         {/* <Route path="/cart/:cid" element={<CartComponent cart={cart} setCart={setCart} />} /> */}
 
-        <Route path='/book/cart/:cid' element={<CartComponent cart={cart} setCart={setCart}/>} /> 
+        <Route path='/book/cart/:id' element={<CartComponent cart={cart} setCart={setCart}/>} /> 
         <Route path='/admin/add/:id' element={<AddingBook />} /> 
         <Route path='/admin/dashboard/:id' element={<AdminDashboard />} />
         <Route path="/admin/update/:id" element={<UpdateComponent />} />
@@ -92,8 +57,8 @@ function App() {
 
 
 
-
-        <Route path="/book/cart" element={<CartComponent />} />
+{/* 
+        <Route path="/book/cart" element={<CartComponent />} /> */}
 
       </Routes>
     </div>

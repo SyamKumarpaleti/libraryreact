@@ -4,7 +4,7 @@ import axios from "axios";
 import { useParams } from "react-router";
 import AdminNavbar from "./adminnavbar";
 
-function UpdateComponent(bid) {
+const UpdateComponent = (bid) => {
     const { id } = useParams();
     const [book, setBook] = useState({});
     const [bookTitle, setBookTitle] = useState('');
@@ -16,33 +16,33 @@ function UpdateComponent(bid) {
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        if (!bookTitle || !author || !noOfCopies || !bookPrice) {
-            setErrorMsg("Please provide all information.");
+        if (!bookTitle && !author && !noOfCopies && !bookPrice) {
+            setErrorMsg("Please provide at least one piece of information to update.");
             return;
         }
 
-        if (isNaN(parseFloat(bookPrice)) || isNaN(parseInt(noOfCopies))) {
+        if ((bookPrice && isNaN(parseFloat(bookPrice))) || (noOfCopies && isNaN(parseInt(noOfCopies)))) {
             setErrorMsg("Invalid input for Book Price or Number of Copies. Please enter valid numbers.");
             return;
         }
 
-        if (parseFloat(bookPrice) <= 0 || parseInt(noOfCopies) <= 0) {
+        if ((bookPrice && parseFloat(bookPrice) <= 0) || (noOfCopies && parseInt(noOfCopies) <= 0)) {
             setErrorMsg("Book Price and Number of Copies must be greater than zero.");
             return;
         }
 
-        let data = {
-            "bookTitle": bookTitle,
-            "author": author,
-            "bookPrice": bookPrice,
-            "noOfCopies": noOfCopies,
+        let updatedData = {
+            "bookTitle": bookTitle !== '' ? bookTitle : book.bookTitle,
+            "author": author !== '' ? author : book.author,
+            "bookPrice": bookPrice !== '' ? bookPrice : book.bookPrice,
+            "noOfCopies": noOfCopies !== '' ? noOfCopies : book.noOfCopies,
         };
 
-        axios.put(`http://localhost:8182/Book/update/${id}`, data)
+        axios.put(`http://localhost:8182/Book/update/${id}`, updatedData)
             .then(response => {
                 console.log("Updated Book Data:", response.data);
                 setBook(response.data);
-                setErrorMsg("");
+                setErrorMsg("Updated successfully."); // Set your success message
             })
             .catch(error => {
                 console.error("Error updating book:", error);

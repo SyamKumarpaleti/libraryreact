@@ -180,8 +180,8 @@ function CartComponent({ cart, setCart }) {
     }
   };
 
-  const totalPrice = cart.reduce((sum, book) => sum + book.bookPrice, 0);
-  const totalBooks = cart.length;
+  // const totalPrice = cart.reduce((sum, book) => sum + book.bookPrice, 0);
+  // const totalBooks = cart.length;
 
   return (
     <div>
@@ -194,9 +194,9 @@ function CartComponent({ cart, setCart }) {
             <div key={index} className="col-md-4 mb-4">
               <Card style={{ width: '400px', backgroundColor: '#your_card_background_color_here' }}>
                 <Card.Body style={{ backgroundColor: '#your_card_body_background_color_here' }}>
-                  <Link to={'/books?id=' + book.id}>
+                
                     <Card.Title>{book.bookTitle}</Card.Title>
-                  </Link>
+               
                   <hr />
                   <div style={{ display: 'flex', flexDirection: 'column', marginBottom: '10px' }}>
                     <div><span style={{ fontWeight: 'bold' }}>Rating:</span> {book.rating}</div>
@@ -206,6 +206,11 @@ function CartComponent({ cart, setCart }) {
                     </div>
                     <div><span style={{ fontWeight: 'bold' }}>Category:</span> {book.category.name}</div>
                     <div><span style={{ fontWeight: 'bold' }}>Price:</span> {book.bookPrice}</div>
+                    <div>
+                              <Link to={'/books?id='+book.id} style={{ color: '#007bff' }}>
+                                Info
+                              </Link>
+                            </div>
                     <Button onClick={() => setCart((prevCart) => prevCart.filter((item) => item.id !== book.id))}>
                       Remove from Cart
                     </Button>
@@ -226,7 +231,7 @@ function CartComponent({ cart, setCart }) {
                     <Modal.Title>Enter Details</Modal.Title>
                   </Modal.Header>
                   <Modal.Body>
-                    <p>List of Books: [{cart.map((book) => book.id).join(", ")}]</p>
+                  
                     <Form>
                       <Form.Group controlId="issueDate">
                         <Form.Label>Issue Date</Form.Label>
